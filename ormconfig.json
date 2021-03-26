@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "docker",
+  "password": "dynamox",
+  "database": "dynamox",
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
+}
