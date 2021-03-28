@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 
-import { ICreateCategoryDTO, IDeleteCategoryDTO } from "../../dtos";
+import { ICreateCategoryDTO, IUpdateCategoryDTO } from "../../dtos";
 import { Category } from "../../entities/Category";
 import { ICategoriesRepository } from "../ICategoriesRepository";
 
@@ -26,7 +26,7 @@ class CategoriesRepository implements ICategoriesRepository {
     id,
     name,
     description,
-  }: IDeleteCategoryDTO): Promise<void> {
+  }: IUpdateCategoryDTO): Promise<void> {
     await this.repository.update(id, {
       name,
       description,
