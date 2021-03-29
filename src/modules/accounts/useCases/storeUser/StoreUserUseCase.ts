@@ -2,17 +2,17 @@ import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../errors/AppError";
-import { ICreateUserDTO } from "../../dtos";
+import { IStoreUserDTO } from "../../dtos";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
-class CreateUserUseCase {
+class StoreUserUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute({ name, email, password }: ICreateUserDTO): Promise<void> {
+  async execute({ name, email, password }: IStoreUserDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -25,4 +25,4 @@ class CreateUserUseCase {
   }
 }
 
-export { CreateUserUseCase };
+export { StoreUserUseCase };

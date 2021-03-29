@@ -1,8 +1,8 @@
-import { ICreateUserDTO } from "../dtos";
+import { IStoreUserDTO } from "../dtos";
 import { User } from "../entities/User";
 
 interface IUsersRepository {
-  store(data: ICreateUserDTO): Promise<void>;
+  store(data: IStoreUserDTO): Promise<void>;
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
 }
