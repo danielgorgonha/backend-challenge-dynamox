@@ -14,6 +14,7 @@ export class StoreProducts1616929657777 implements MigrationInterface {
           {
             name: "categoryId",
             type: "uuid",
+            isNullable: true,
           },
           {
             name: "name",
@@ -44,12 +45,12 @@ export class StoreProducts1616929657777 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: "FKCategory",
+            name: "FKCategoryProduct",
             referencedTableName: "categories",
             referencedColumnNames: ["id"],
             columnNames: ["categoryId"],
-            onDelete: "CASCADE",
-            onUpdate: "CASCADE",
+            onDelete: "SET NULL",
+            onUpdate: "SET NULL",
           },
         ],
       })
