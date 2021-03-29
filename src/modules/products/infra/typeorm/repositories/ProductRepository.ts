@@ -1,9 +1,8 @@
 import { getRepository, Repository } from "typeorm";
 
 import { ICreateProductDTO, IUpdateProductDTO } from "@Modules/products/dtos";
-import { Product } from "@Modules/products/entities/Product";
-
-import { IProductRepository } from "../IProductRepository";
+import { Product } from "@Modules/products/infra/typeorm/entities/Product";
+import { IProductRepository } from "@Modules/products/repositories/IProductRepository";
 
 class ProductRepository implements IProductRepository {
   private repository: Repository<Product>;

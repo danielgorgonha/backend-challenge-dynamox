@@ -1,5 +1,5 @@
 import { IStoreUserDTO } from "../dtos";
-import { User } from "../entities/User";
+import { User } from "../infra/typeorm/entities/User";
 
 interface IUsersRepository {
   store(data: IStoreUserDTO): Promise<void>;

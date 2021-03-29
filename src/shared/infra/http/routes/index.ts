@@ -1,7 +1,7 @@
 import { Router } from "express";
 import swaggerUi from "swagger-ui-express";
 
-import swaggerFile from "../swgger.json";
+import swaggerFile from "../../../../swgger.json";
 import { authenticateRotues } from "./authenticate.routes";
 import { categoriesRoutes } from "./categories.routes";
 import { productsRoutes } from "./products.routes";

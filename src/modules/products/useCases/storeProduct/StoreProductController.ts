@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { AppError } from "../../../../errors/AppError";
+import { AppError } from "@Shared/errors/AppError";
+
 import { StoreProductUseCase } from "./StoreProductUseCase";
 
 class StoreProductController {

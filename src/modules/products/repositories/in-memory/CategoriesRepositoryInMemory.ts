@@ -1,5 +1,5 @@
 import { ICreateCategoryDTO } from "@Modules/products/dtos";
-import { Category } from "@Modules/products/entities/Category";
+import { Category } from "@Modules/products/infra/typeorm/entities/Category";
 
 import { ICategoriesRepository } from "../ICategoriesRepository";
 

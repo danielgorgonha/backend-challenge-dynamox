@@ -1,12 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 
-import "./database";
+import "@Shared/infra/typeorm";
 import "@Shared/container";
 
-import { AppError } from "@Errors/AppError";
-
-import { router } from "./routes";
+import { AppError } from "@Shared/errors/AppError";
+import { router } from "@Shared/infra/http/routes";
 
 const app = express();
 

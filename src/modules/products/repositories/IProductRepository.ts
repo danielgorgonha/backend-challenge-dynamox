@@ -1,5 +1,5 @@
 import { ICreateProductDTO, IUpdateProductDTO } from "../dtos";
-import { Product } from "../entities/Product";
+import { Product } from "../infra/typeorm/entities/Product";
 
 interface IProductRepository {
   store({

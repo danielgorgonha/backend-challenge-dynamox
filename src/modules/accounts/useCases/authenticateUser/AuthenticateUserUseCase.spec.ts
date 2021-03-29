@@ -1,6 +1,6 @@
-import { AppError } from "@Errors/AppError";
 import { IStoreUserDTO } from "@Modules/accounts/dtos";
 import { UsersRepositoryInMemory } from "@Modules/accounts/repositories/in-memory/UsersRepositoryInMemory";
+import { AppError } from "@Shared/errors/AppError";
 
 import { StoreUserUseCase } from "../storeUser/StoreUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";

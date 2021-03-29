@@ -1,5 +1,5 @@
-import { AppError } from "@Errors/AppError";
 import { CategoriesRepositoryInMemory } from "@Modules/products/repositories/in-memory/CategoriesRepositoryInMemory";
+import { AppError } from "@Shared/errors/AppError";
 
 import { StoreCategoryUseCase } from "./StoreCategoryUseCase";
 
