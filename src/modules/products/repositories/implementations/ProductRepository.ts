@@ -1,7 +1,8 @@
 import { getRepository, Repository } from "typeorm";
 
-import { ICreateProductDTO, IUpdateProductDTO } from "../../dtos";
-import { Product } from "../../entities/Product";
+import { ICreateProductDTO, IUpdateProductDTO } from "@Modules/products/dtos";
+import { Product } from "@Modules/products/entities/Product";
+
 import { IProductRepository } from "../IProductRepository";
 
 class ProductRepository implements IProductRepository {

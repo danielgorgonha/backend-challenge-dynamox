@@ -1,5 +1,6 @@
-import { AppError } from "../../../../errors/AppError";
-import { CategoriesRepositoryInMemory } from "../../repositories/in-memory/CategoriesRepositoryInMemory";
+import { AppError } from "@Errors/AppError";
+import { CategoriesRepositoryInMemory } from "@Modules/products/repositories/in-memory/CategoriesRepositoryInMemory";
+
 import { StoreCategoryUseCase } from "./StoreCategoryUseCase";
 
 let storeCategoryUseCase: StoreCategoryUseCase;
