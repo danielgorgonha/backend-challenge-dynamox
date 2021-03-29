@@ -1,11 +1,11 @@
 import { container } from "tsyringe";
 
-import { UsersRepository } from "../../modules/accounts/repositories/implementations/UsersRepository";
-import { IUsersRepository } from "../../modules/accounts/repositories/IUsersRepository";
-import { ICategoriesRepository } from "../../modules/products/repositories/ICategoriesRepository";
-import { CategoriesRepository } from "../../modules/products/repositories/implementations/CategoriesRepository";
-import { ProdcutRepository } from "../../modules/products/repositories/implementations/ProductRepository";
-import { IProductRepository } from "../../modules/products/repositories/IProductRepository";
+import { UsersRepository } from "@Modules/accounts/repositories/implementations/UsersRepository";
+import { IUsersRepository } from "@Modules/accounts/repositories/IUsersRepository";
+import { ICategoriesRepository } from "@Modules/products/repositories/ICategoriesRepository";
+import { CategoriesRepository } from "@Modules/products/repositories/implementations/CategoriesRepository";
+import { ProductRepository } from "@Modules/products/repositories/implementations/ProductRepository";
+import { IProductRepository } from "@Modules/products/repositories/IProductRepository";
 
 container.registerSingleton<IUsersRepository>(
   "UsersRepository",
@@ -18,6 +18,6 @@ container.registerSingleton<ICategoriesRepository>(
 );
 
 container.registerSingleton<IProductRepository>(
-  "ProdcutRepository",
-  ProdcutRepository
+  "ProductRepository",
+  ProductRepository
 );

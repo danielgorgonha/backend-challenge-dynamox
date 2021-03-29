@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
-import { Product } from "../../entities/Product";
-import { IProductRepository } from "../../repositories/IProductRepository";
+import { Product } from "@Modules/products/entities/Product";
+import { IProductRepository } from "@Modules/products/repositories/IProductRepository";
 
 @injectable()
 class IndexProductUseCase {

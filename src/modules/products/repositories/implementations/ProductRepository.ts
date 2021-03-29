@@ -1,10 +1,10 @@
 import { getRepository, Repository } from "typeorm";
 
-import { ICreateProductDTO } from "../../dtos";
+import { ICreateProductDTO, IUpdateProductDTO } from "../../dtos";
 import { Product } from "../../entities/Product";
 import { IProductRepository } from "../IProductRepository";
 
-class ProdcutRepository implements IProductRepository {
+class ProductRepository implements IProductRepository {
   private repository: Repository<Product>;
 
   constructor() {
@@ -49,6 +49,18 @@ class ProdcutRepository implements IProductRepository {
   async delete(id: string): Promise<void> {
     await this.repository.delete(id);
   }
+
+  updateById({
+    id,
+    name,
+    categoryId,
+    expirationDate,
+    manufacturingDate,
+    price,
+    perishableProduct,
+  }: IUpdateProductDTO): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
-export { ProdcutRepository };
+export { ProductRepository };

@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import { DeleteProductController } from "../modules/products/useCases/deleteProduct/DeleteProductController";
-import { IndexProductController } from "../modules/products/useCases/indexProduct/IndexProductController";
-import { ShowProductController } from "../modules/products/useCases/showProduct/ShowProductController";
-import { StoreProductController } from "../modules/products/useCases/storeProduct/StoreProductController";
-import { UpdateProductController } from "../modules/products/useCases/updateProduct/UpdateProductController";
+import { DeleteProductController } from "@Modules/products/useCases/deleteProduct/DeleteProductController";
+import { IndexProductController } from "@Modules/products/useCases/indexProduct/IndexProductController";
+import { ShowProductController } from "@Modules/products/useCases/showProduct/ShowProductController";
+import { StoreProductController } from "@Modules/products/useCases/storeProduct/StoreProductController";
+import { UpdateProductController } from "@Modules/products/useCases/updateProduct/UpdateProductController";
 
-const produtsRoutes = Router();
+const productsRoutes = Router();
 
 const storeProductController = new StoreProductController();
 const indexProductController = new IndexProductController();
@@ -14,10 +14,10 @@ const showProductController = new ShowProductController();
 const deleteProductController = new DeleteProductController();
 const updateProductController = new UpdateProductController();
 
-produtsRoutes.post("/", storeProductController.handle);
-produtsRoutes.get("/", indexProductController.handle);
-produtsRoutes.get("/:id", showProductController.handle);
-produtsRoutes.delete("/:id", deleteProductController.handle);
-produtsRoutes.put("/:id", updateProductController.handle);
+productsRoutes.post("/", storeProductController.handle);
+productsRoutes.get("/", indexProductController.handle);
+productsRoutes.get("/:id", showProductController.handle);
+productsRoutes.delete("/:id", deleteProductController.handle);
+productsRoutes.put("/:id", updateProductController.handle);
 
-export { produtsRoutes };
+export { productsRoutes };

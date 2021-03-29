@@ -1,10 +1,10 @@
 import { Router } from "express";
 
-import { DeleteCategoryController } from "../modules/products/useCases/deleteCategory/DeleteCategoryController";
-import { IndexCategoriesController } from "../modules/products/useCases/indexCategories/IndexCategoriesController";
-import { ShowCategoryController } from "../modules/products/useCases/showCategories/ShowCategoryController";
-import { StoreCategoryController } from "../modules/products/useCases/storeCategory/StoreCategoryController";
-import { UpdateCategoryController } from "../modules/products/useCases/updateCategory/UpdateCategoryController";
+import { DeleteCategoryController } from "@Modules/products/useCases/deleteCategory/DeleteCategoryController";
+import { IndexCategoriesController } from "@Modules/products/useCases/indexCategories/IndexCategoriesController";
+import { ShowCategoryController } from "@Modules/products/useCases/showCategories/ShowCategoryController";
+import { StoreCategoryController } from "@Modules/products/useCases/storeCategory/StoreCategoryController";
+import { UpdateCategoryController } from "@Modules/products/useCases/updateCategory/UpdateCategoryController";
 
 const categoriesRoutes = Router();
 

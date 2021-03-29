@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { StoreUserController } from "../modules/accounts/useCases/storeUser/StoreUserController";
+import { StoreUserController } from "@Modules/accounts/useCases/storeUser/StoreUserController";
 
 const usersRoutes = Router();
 

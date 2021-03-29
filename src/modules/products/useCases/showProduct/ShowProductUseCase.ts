@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe";
 
-import { AppError } from "../../../../errors/AppError";
-import { Product } from "../../entities/Product";
-import { IProductRepository } from "../../repositories/IProductRepository";
+import { AppError } from "@Errors/AppError";
+import { Product } from "@Modules/products/entities/Product";
+import { IProductRepository } from "@Modules/products/repositories/IProductRepository";
 
 @injectable()
 class ShowProductUseCase {
