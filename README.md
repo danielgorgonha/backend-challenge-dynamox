@@ -10,8 +10,7 @@ API RESTfull para gerenciamento de produtos e categorias, com controle e autenti
 ## Cadastro de Produto
 
 **RF**
-Deve conseguir cadastrar um novo produto;
-Deve ser possível listar todas as categorias;
+Deve conseguir cadastrar um novo produto;=
 
 **RN**
 Não deve ser posssível cadastrar um produto com o nome já existente;

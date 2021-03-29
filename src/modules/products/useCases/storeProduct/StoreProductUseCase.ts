@@ -1,7 +1,4 @@
-import { inject, injectable } from "tsyringe";
-
-import { IProductRepository } from "@Modules/products/repositories/IProductRepository";
-import { AppError } from "@Shared/errors/AppError";
+import { IProductsRepository } from "@Modules/products/repositories/IProductsRepository";
 
 interface IRequest {
   categoryId: string;
@@ -12,12 +9,8 @@ interface IRequest {
   price: number;
 }
 
-@injectable()
 class StoreProductUseCase {
-  constructor(
-    @inject("ProdcutRepository")
-    private productRepository: IProductRepository
-  ) {}
+  constructor(private productsRepository: IProductsRepository) {}
 
   async execute({
     categoryId,
@@ -27,13 +20,7 @@ class StoreProductUseCase {
     expirationDate,
     price,
   }: IRequest): Promise<void> {
-    const productAlreadyExists = await this.productRepository.findByName(name);
-
-    if (productAlreadyExists) {
-      throw new AppError("Product already exists");
-    }
-
-    this.productRepository.store({
+    this.productsRepository.store({
       categoryId,
       name,
       manufacturingDate,
