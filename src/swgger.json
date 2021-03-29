@@ -1,0 +1,885 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "BackEnd Challenge Dynamox - Documentando com Swagger",
+    "description": "This is an API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "rogergorgonha@gmail.com"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "John Doe",
+                  "email": "john.doe@example.com",
+                  "password": "1234567"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": " Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "a32d8169-56ef-4d48-a2c1-a595ff748116",
+                    "name": "John Doe",
+                    "email": "john.doe@example.com",
+                    "admin": false,
+                    "created_at": "2021-03-28T19:18:00:992Z",
+                    "updated_at": "2021-03-28T19:18:00:992Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "E-mail is already being used.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User already exists."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{user_id}/admin": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Makes admin a user",
+        "description": "Makes admin a user",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "ID User",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "a32d8169-56ef-4d48-a2c1-a595ff748116",
+                    "name": "John Doe",
+                    "email": "john.doe@example.com",
+                    "admin": true,
+                    "created_at": "2021-03-22T19:18:00:992Z",
+                    "updated_at": "2021-03-22T19:18:00:992Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Login in system",
+        "description": "login to the system to retrieve session access token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTY5Nzc2NDIsImV4cCI6MTYxNzA2NDA0Miwic3ViIjoiNjgzYmY3NTQtN2QwNS00YjQ2LWJkMWItYWI5ZTI5ZDNjMWNmIn0.agOJONkEoT9nev63IMcKY-SyzYNTDbhH-djm9qEG2YU",
+                    "user": {
+                      "name": "John Doe",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email or password incorrect.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Email or password incorrect!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories": {
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Create a new category",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": " Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "Categoria A",
+                    "description": "Categoria A"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Category already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Category already exists!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Categories"],
+        "summary": "List all categories",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                      "name": "Categoria A",
+                      "description": "Categoria A",
+                      "created_at": "2021-03-28T02:55:24.029Z"
+                    },
+                    {
+                      "id": "72072f17-cb6e-4a07-8c1c-04785dcfef15",
+                      "name": "Cateogria B",
+                      "description": "Categoria B",
+                      "created_at": "2021-03-29T03:38:32.652Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/categories/{category_id}": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "List a specific category",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID Category",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                    "name": "Categoria A",
+                    "description": "Categoria A",
+                    "created_at": "2021-03-28T02:55:24.029Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Categories"],
+        "summary": "Denounces a category.",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID Category",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Category does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Category does not exist"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Categories"],
+        "summary": "Change the data for a category.",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID Category",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Categoria C",
+                  "description": "Categoria C"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "Categoria C",
+                    "description": "Categoria C"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos": {
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Create a new product",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "categoryId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "manufacturingDate": {
+                    "type": "string"
+                  },
+                  "perishableProduct": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "expirationDate": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                    "name": "Maquina A",
+                    "manufacturingDate": "2021-01-01",
+                    "perishableProduct": true,
+                    "expirationDate": "2022-12-01",
+                    "price": 500.65
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Product already exists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Product already exists!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "List all products",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "categoryId": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "manufacturingDate": {
+                        "type": "string"
+                      },
+                      "perishableProduct": {
+                        "type": "boolean"
+                      },
+                      "expirationDate": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "number"
+                      },
+                      "created_at": {
+                        "type": "Date"
+                      }
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "05487ed7-bbd6-42a2-9d44-d1d1dbad274f",
+                      "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                      "name": "Maquina A",
+                      "manufacturingDate": "2021-01-01",
+                      "perishableProduct": true,
+                      "expirationDate": "2022-01-01",
+                      "price": "500.00",
+                      "created_at": "2021-03-28T15:18:14.240Z"
+                    },
+                    {
+                      "id": "21e18349-5299-4947-866c-f1a075f84821",
+                      "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                      "name": "Maquina B",
+                      "manufacturingDate": "2021-01-01",
+                      "perishableProduct": true,
+                      "expirationDate": "2022-12-01",
+                      "price": "500.65",
+                      "created_at": "2021-03-28T17:48:22.452Z"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/{product_id}": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "List a specific product",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID product",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "05487ed7-bbd6-42a2-9d44-d1d1dbad274f",
+                    "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                    "name": "Maquina A",
+                    "manufacturingDate": "2021-01-01",
+                    "perishableProduct": true,
+                    "expirationDate": "2022-01-01",
+                    "price": "500.00",
+                    "created_at": "2021-03-28T15:18:14.240Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Produtos"],
+        "summary": "Denounces a product.",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID Product",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Product does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "Product does not exist"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Produtos"],
+        "summary": "Change the data for a product.",
+        "description": "Only * admin * user can access",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "description": "ID User",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID Product",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "categoryId": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "manufacturingDate": {
+                    "type": "string"
+                  },
+                  "perishableProduct": {
+                    "type": "boolean"
+                  },
+                  "expirationDate": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "number"
+                  },
+                  "created_at": {
+                    "type": "Date"
+                  }
+                },
+                "example": {
+                  "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                  "name": "Maquina C",
+                  "manufacturingDate": "2021-01-01",
+                  "perishableProduct": true,
+                  "expirationDate": "2023-12-01",
+                  "price": "1100.50"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Operation performed successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "id": "05487ed7-bbd6-42a2-9d44-d1d1dbad274f",
+                    "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
+                    "name": "Maquina C",
+                    "manufacturingDate": "2021-01-01",
+                    "perishableProduct": true,
+                    "expirationDate": "2023-12-01",
+                    "price": "1100.50",
+                    "created_at": "2021-03-28T15:18:14.240Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
