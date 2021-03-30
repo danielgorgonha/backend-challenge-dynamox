@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { Category } from "@Modules/products/infra/typeorm/entities/Category";
 import { ICategoriesRepository } from "@Modules/products/repositories/ICategoriesRepository";
+import { AppError } from "@Shared/errors/AppError";
 
 interface IRequest {
   id: string;
@@ -17,6 +18,14 @@ class UpdateCategoryUseCase {
   ) {}
 
   async execute({ id, name, description }: IRequest): Promise<Category> {
+    if (!name) {
+      throw new AppError("Name is requerid!");
+    }
+
+    if (!description) {
+      throw new AppError("description is requerid!");
+    }
+
     const category = await this.categoriesRespository.updateById(
       id,
       name,

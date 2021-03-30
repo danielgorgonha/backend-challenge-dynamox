@@ -53,6 +53,43 @@ class ProductsRepository implements IProductsRepository {
 
     return products;
   }
+
+  async updateById(
+    id: string,
+    categoryId: string,
+    name: string,
+    manufacturingDate: Date,
+    perishableProduct: boolean,
+    expirationDate: Date,
+    price: number
+  ): Promise<Product> {
+    await this.repository
+      .createQueryBuilder("p")
+      .update(Product)
+      .set({
+        categoryId,
+        name,
+        manufacturingDate,
+        perishableProduct,
+        expirationDate,
+        price,
+      })
+      .where("id = :id", { id })
+      .execute();
+
+    const product = await this.repository.findOne({ id });
+
+    return product;
+  }
+
+  async removeById(id: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder("p")
+      .delete()
+      .from(Product)
+      .where("id = :id", { id })
+      .execute();
+  }
 }
 
 export { ProductsRepository };

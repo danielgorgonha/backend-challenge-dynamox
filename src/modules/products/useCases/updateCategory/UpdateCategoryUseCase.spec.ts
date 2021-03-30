@@ -13,7 +13,7 @@ describe("Update Category", () => {
     );
   });
 
-  it("Should be able to update category", async () => {
+  it("Should be able to update a category", async () => {
     const categoryStore = await categoriesRepositoryInMemory.store({
       name: "Frios",
       description: "Categoria de Frios",

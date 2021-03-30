@@ -42,6 +42,35 @@ class ProductsRepositoryInMemory implements IProductsRepository {
     );
     return this.products;
   }
+
+  async updateById(
+    id: string,
+    categoryId: string,
+    name: string,
+    manufacturingDate: Date,
+    perishableProduct: boolean,
+    expirationDate: Date,
+    price: number
+  ): Promise<Product> {
+    const product = this.products.find((product) => product.id === id);
+
+    product.categoryId = categoryId;
+    product.name = name;
+    product.manufacturingDate = manufacturingDate;
+    product.perishableProduct = perishableProduct;
+    product.expirationDate = expirationDate;
+    product.price = price;
+
+    return product;
+  }
+
+  async removeById(id: string): Promise<void> {
+    const productIndex = this.products.findIndex(
+      (product) => product.id === id
+    );
+
+    this.products.splice(productIndex, 1);
+  }
 }
 
 export { ProductsRepositoryInMemory };
