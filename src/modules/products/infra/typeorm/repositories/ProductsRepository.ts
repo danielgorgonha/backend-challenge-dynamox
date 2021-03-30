@@ -37,6 +37,22 @@ class ProductsRepository implements IProductsRepository {
     const product = await this.repository.findOne({ name });
     return product;
   }
+
+  async findAll(categoryId?: string, name?: string): Promise<Product[]> {
+    const productsQuery = this.repository.createQueryBuilder("p");
+
+    if (categoryId) {
+      productsQuery.andWhere("p.categoryId = :categoryId", { categoryId });
+    }
+
+    if (name) {
+      productsQuery.andWhere("p.name = :name", { name });
+    }
+
+    const products = await productsQuery.getMany();
+
+    return products;
+  }
 }
 
 export { ProductsRepository };

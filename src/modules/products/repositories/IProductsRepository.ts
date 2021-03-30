@@ -4,6 +4,7 @@ import { Product } from "../infra/typeorm/entities/Product";
 interface IProductsRepository {
   store(data: IStoreProductDTO): Promise<Product>;
   findByName(name: string): Promise<Product>;
+  findAll(categoryId?: string, name?: string): Promise<Product[]>;
 }
 
 export { IProductsRepository };
