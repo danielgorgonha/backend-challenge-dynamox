@@ -52,8 +52,7 @@
   <img  src="https://img.shields.io/badge/-Typeorm-F37626?&style=for-the-badge&logoColor=fff&logo=Databricks&logoWidth=25"/>
   <img  src="https://img.shields.io/badge/-Docker-2496ED?&style=for-the-badge&logoColor=fff&logo=Docker&logoWidth=25"/>
 </p>
-<br/><br/>
-<p align="left>
+<p align="left">
 
 ### :keyboard: Instalação e Execução do Projeto
 
@@ -105,9 +104,9 @@ yarn test
 yarn dev
 ```
 </p>
-<br/><br/>
+<br/>
 <p align="center">
-
+  <img src="./assets/test.png">
 </p>
 
 ### Documentações com Swagger
