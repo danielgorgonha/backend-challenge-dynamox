@@ -1,66 +1,136 @@
-# backend-challenge-dynamox
-API RESTfull para gerenciamento de produtos e categorias, com controle e autenticação de usuários.
+<h1 align="center">🚀 Dynamox - BackEnd Challenge</h1>
+<p align="center">
+  API RESTfull para gerenciamento de produtos e categorias, com controle e autenticação de usuários com JWT.
+  <br>
+</p>
+<h1 align="center">:pushpin: Sobre o desafio</h1>
+<p align="left">
+  Nesse desafio, foi utilizado varios princípios, um deles o SOLID para trabalhar a programação orientada a objetos e design de código.
 
-# Levantamento de Requisito
+### Introdução
+  Criar um gerenciador de produtos e categorias, com controle e autenticação de usuários.
 
-**RF** => Requisitos funcionais
-**RN** => Requisitos não funcionais
-**RN** => Regra de negócio
+### O Projeto
+  Desenvolver uma API RESTful utilizando nodejs e banco de dados relacional. Cada produto deve pertencer a uma categoria pré registrada no sistema.
 
-## Cadastro de Produto
+### Funcionalidades
 
-**RF**
-Deve conseguir cadastrar um novo produto;=
+#### ● Usuários
+  ○ (store) Cadastrar usuário
+  ○ (login) Login de usuário retornando um bearer token para utilizar nas
+  chamadas abaixo
+#### ● Categorias
+  ○ (store) Cadastrar categoria
+  ○ (update) Atualizar categoria
+  ○ (delete) Remover categoria
+  ○ (show) Exibir categoria
+  ○ (index) Listar categorias
+#### ● Produtos
+  ○ (store) Cadastrar produto
+  ○ (update) Atualizar produto
+  ○ (delete) Remover produto
+  ○ (show) Exibir produto
+  ○ (index) Listar produtos
+    ■ Filtrar por categorias
 
-**RN**
-Não deve ser posssível cadastrar um produto com o nome já existente;
-Não deve ser possível cadastrar uma produto sem categoria;
-A data de fabricação nunca deve ser maior que a data de validade;
-O Preço do produto deverá ser registrado com 2 casas decimais;
-O usuário responsável pelo cadastro deve ser um usuário administrador;
+### Regras de negócio
+  ● A data de fabricação nunca deve ser maior que a data de validade;
+  ● O Preço do produto deverá ser registrado com 2 casas decimais;
+  ● A listagem deve ter a possibilidade de ordenação dos campos e com uma paginação de 10 produtos por página.
+  <br>
+</p>
 
-## Listagem de produtos
+<h1 align="center">:pushpin: Algumas das tecnologias utilizadas</h1>
+<p align="center">
+  Abaixo estão algumas das tecnologias utilizadas durante o desenvolvimento do backend. Ainda foi visado: Organizar o diretório da nossa aplicação de forma concisa, limpa e eficiente. Escrever código limpo visando reutilização e eficiência e criar testes unitários de integração.
+</p>
+<br>
+<p align="center">
+  <img  src="https://img.shields.io/badge/-Yarn-2C8EBB?&style=for-the-badge&logoColor=fff&logo=yarn&logoWidth=25"/>
+  <img  src="https://img.shields.io/badge/-TypeScript-3178C6?&style=for-the-badge&logoColor=fff&logo=TypeScript&logoWidth=25"/>
+  <img  src="https://img.shields.io/badge/-Node.js-339933?&style=for-the-badge&logoColor=fff&logo=Node.js&logoWidth=25"/>
+  <img  src="https://img.shields.io/badge/-Typeorm-F37626?&style=for-the-badge&logoColor=fff&logo=Databricks&logoWidth=25"/>
+  <img  src="https://img.shields.io/badge/-Docker-2496ED?&style=for-the-badge&logoColor=fff&logo=Docker&logoWidth=25"/>
+</p>
 
-### (Index)
-**RF**
-Deve ser possível listar todos os produtos;
-Deve ser possível listar todos os produtos pelo nome da categoria;
-Deve ser possível listar todos os produtos pelo nome do produto;
+<p align="left>
 
-**RN**
-O usuário não precisa estar logado no sistema.
+### :keyboard: Instalação e Execução do Projeto
 
-### (Show)
-**RF**
-Deve ser possível listar um produto especifico pelo ID.
+- Clone este repositório
 
-**RN**
-O usuário não precisa estar logado no sistema.
+```
+> git clone https://github.com/danielgorgonha/backend-challenge-dynamox
+```
 
-## Cadastro de categoria
+- Navegue até o diretório principal do projeto
 
-**RF**
-Deve conseguir cadastrar uma nova categoria;
+```
+> cd backend-challenge-dynamox
+```
 
-**RN**
-Não deve ser posssível cadastrar um categoria com o nome já existente;
-O usuário responsável pelo cadastro deve ser um usuário administrador;
+- Instale as dependências com o Yarn
 
+```
+yarn
+```
 
-## Itens faltantes
+- Utilizando o Docker Compose
 
-- Criar patch para tonar administration.
-- Passar user autenticado pelo headers.
-- Criar middleware para verificar user administration.
-- Repasar os middlewares de autenticacao.
-- Finalizar teste unitario e de integracao utilizando as ferramentas: (Supertest, Usar TDD, Criar DB para teste).
-- Criar coluna (updated_at) em cada tabela (Criando uma migration especifia).
-- Criar paginacao para os gets (typeorm-pagination).
-- Ajustar e finalizar documentacao.
-- Refatorar o codigo para atender os requisitos.
-- Criar README moderno e auto explicativo.
+```
+docker-compose up -d
+```
 
+- Instale as migrations
 
-## Itens de melhoria
-- Criar rota para imports de arquivos cv para cadastro de categorias e produtos.
-- Criar upload de avatar para o user.
+```
+yarn typeorm migration:run
+```
+
+- Insert Administrator - (Acesse a rota /login, passando { email e password } para ter acesso ao token JWT)
+
+```
+yarn seed:admin
+```
+
+- Rode a suite de testes
+
+```
+yarn test
+```
+
+- Execute o projeto
+
+```
+yarn dev
+```
+</p>
+
+<p align="center">
+  <img src="./assets/test.png">
+</p>
+
+### Documentações com Swagger
+## O que foi documentado?
+
+Neste desafio foi documentado as entradas e saídas da API. Abaixo os principais pontos documentado:
+
+- Informações gerais da API (nome, descrição, etc.);
+- Rotas;
+- Parâmetros;
+- Corpo da Requisição;
+- Respostas de sucesso;
+- Respostas de erro;
+- Exemplos;
+
+<p align="center">
+  <img src="./assets/api-docs-new.png">
+</p>
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/git/git-scm.com/blob/master/MIT-LICENSE.txt) para mais detalhes.
+
+---
+
+Feito com 💜 by <a href="https://www.linkedin.com/in/danielgorgonha/">Daniel R Gorgonha</a> :wave:
