@@ -8,9 +8,9 @@ class StoreCategoryController {
     const { name, description } = request.body;
 
     const storeCategoryUseCase = container.resolve(StoreCategoryUseCase);
-    await storeCategoryUseCase.execute({ name, description });
+    const category = await storeCategoryUseCase.execute({ name, description });
 
-    return response.status(201).send();
+    return response.status(201).json(category);
   }
 }
 

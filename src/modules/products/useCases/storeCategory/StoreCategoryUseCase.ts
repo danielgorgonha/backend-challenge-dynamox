@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { Category } from "@Modules/products/infra/typeorm/entities/Category";
 import { ICategoriesRepository } from "@Modules/products/repositories/ICategoriesRepository";
 import { AppError } from "@Shared/errors/AppError";
 
@@ -15,7 +16,7 @@ class StoreCategoryUseCase {
     private categoriesRepository: ICategoriesRepository
   ) {}
 
-  async execute({ name, description }: IRequest): Promise<void> {
+  async execute({ name, description }: IRequest): Promise<Category> {
     const categoryAlreadyExists = await this.categoriesRepository.findByName(
       name
     );
@@ -24,7 +25,12 @@ class StoreCategoryUseCase {
       throw new AppError("Category already exists!");
     }
 
-    this.categoriesRepository.store({ name, description });
+    const category = await this.categoriesRepository.store({
+      name,
+      description,
+    });
+
+    return category;
   }
 }
 
