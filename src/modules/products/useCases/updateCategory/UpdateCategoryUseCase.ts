@@ -14,7 +14,7 @@ interface IRequest {
 class UpdateCategoryUseCase {
   constructor(
     @inject("CategoriesRepository")
-    private categoriesRespository: ICategoriesRepository
+    private categoriesRepository: ICategoriesRepository
   ) {}
 
   async execute({ id, name, description }: IRequest): Promise<Category> {
@@ -26,7 +26,15 @@ class UpdateCategoryUseCase {
       throw new AppError("description is requerid!");
     }
 
-    const category = await this.categoriesRespository.updateById(
+    const categoryAlreadyExists = await this.categoriesRepository.findByName(
+      name
+    );
+
+    if (categoryAlreadyExists) {
+      throw new AppError("A category already exists with that name!");
+    }
+
+    const category = await this.categoriesRepository.updateById(
       id,
       name,
       description
