@@ -1,4 +1,8 @@
+import { inject, injectable } from "tsyringe";
+
+import { Product } from "@Modules/products/infra/typeorm/entities/Product";
 import { IProductsRepository } from "@Modules/products/repositories/IProductsRepository";
+import { AppError } from "@Shared/errors/AppError";
 
 interface IRequest {
   categoryId: string;
@@ -9,8 +13,12 @@ interface IRequest {
   price: number;
 }
 
+@injectable()
 class StoreProductUseCase {
-  constructor(private productsRepository: IProductsRepository) {}
+  constructor(
+    @inject("ProductsRepository")
+    private productsRepository: IProductsRepository
+  ) {}
 
   async execute({
     categoryId,
@@ -19,8 +27,20 @@ class StoreProductUseCase {
     perishableProduct,
     expirationDate,
     price,
-  }: IRequest): Promise<void> {
-    this.productsRepository.store({
+  }: IRequest): Promise<Product> {
+    const productAlreadyExists = await this.productsRepository.findByName(name);
+
+    if (productAlreadyExists) {
+      throw new AppError("Product already exists!");
+    }
+
+    if (new Date(manufacturingDate) >= new Date(expirationDate)) {
+      throw new AppError(
+        "Manufacturing date cannot be greater than expiration date!"
+      );
+    }
+
+    const product = await this.productsRepository.store({
       categoryId,
       name,
       manufacturingDate,
@@ -28,6 +48,8 @@ class StoreProductUseCase {
       expirationDate,
       price,
     });
+
+    return product;
   }
 }
 

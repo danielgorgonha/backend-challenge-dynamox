@@ -22,7 +22,7 @@ export class StoreProducts1616929657777 implements MigrationInterface {
           },
           {
             name: "manufacturingDate",
-            type: "varchar",
+            type: "timestamp",
           },
           {
             name: "perishableProduct",
@@ -31,7 +31,7 @@ export class StoreProducts1616929657777 implements MigrationInterface {
           },
           {
             name: "expirationDate",
-            type: "varhcar ",
+            type: "timestamp",
           },
           {
             name: "price",

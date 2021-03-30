@@ -13,7 +13,7 @@ class ProductsRepositoryInMemory implements IProductsRepository {
     perishableProduct,
     expirationDate,
     price,
-  }: IStoreProductDTO): Promise<void> {
+  }: IStoreProductDTO): Promise<Product> {
     const product = new Product();
 
     Object.assign(product, {
@@ -26,6 +26,12 @@ class ProductsRepositoryInMemory implements IProductsRepository {
     });
 
     this.products.push(product);
+
+    return product;
+  }
+
+  async findByName(name: string): Promise<Product> {
+    return this.products.find((product) => product.name === name);
   }
 }
 
