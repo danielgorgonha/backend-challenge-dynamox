@@ -107,7 +107,7 @@ yarn dev
 </p>
 <br/><br/>
 <p align="center">
-  <img src="./assets/test.png">
+
 </p>
 
 ### Documentações com Swagger
