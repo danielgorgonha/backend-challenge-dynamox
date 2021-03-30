@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "BackEnd Challenge Dynamox - Documentando com Swagger",
+    "title": "BackEnd Challenge Dynamox - Documentation in Swagger",
     "description": "This is an API",
     "version": "1.0.0",
     "contact": {
@@ -73,55 +73,6 @@
         }
       }
     },
-    "/{user_id}/admin": {
-      "patch": {
-        "tags": ["Users"],
-        "summary": "Makes admin a user",
-        "description": "Makes admin a user",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "user_id",
-            "description": "ID User",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation performed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "id": "a32d8169-56ef-4d48-a2c1-a595ff748116",
-                    "name": "John Doe",
-                    "email": "john.doe@example.com",
-                    "admin": true,
-                    "created_at": "2021-03-22T19:18:00:992Z",
-                    "updated_at": "2021-03-22T19:18:00:992Z"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "message": "User not found."
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/login": {
       "post": {
         "tags": ["Login"],
@@ -183,13 +134,9 @@
         "tags": ["Categories"],
         "summary": "Create a new category",
         "description": "Only * admin * user can access",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -211,7 +158,7 @@
         },
         "responses": {
           "201": {
-            "description": " Operation performed successfully.",
+            "description": "Operation performed successfully.",
             "content": {
               "application/json": {
                 "schema": {
@@ -241,13 +188,25 @@
       },
       "get": {
         "tags": ["Categories"],
-        "summary": "List all categories",
+        "summary": "Lista all categories and list with query params",
         "description": "Only * admin * user can access",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
+            "in": "query",
+            "name": "id",
+            "description": "Category Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Category Name",
             "required": false,
             "type": "string"
           }
@@ -310,75 +269,21 @@
         }
       }
     },
-    "/categories/{category_id}": {
-      "get": {
-        "tags": ["Categories"],
-        "summary": "List a specific category",
-        "description": "Only * admin * user can access",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID Category",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation performed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "id": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
-                    "name": "Categoria A",
-                    "description": "Categoria A",
-                    "created_at": "2021-03-28T02:55:24.029Z"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "message": "User not found."
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/categories/{id}": {
       "delete": {
         "tags": ["Categories"],
         "summary": "Denounces a category.",
         "description": "Only * admin * user can access",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "id",
-            "description": "ID Category",
+            "description": "Category Id",
             "required": true,
             "type": "string"
           }
@@ -427,18 +332,16 @@
         "tags": ["Categories"],
         "summary": "Change the data for a category.",
         "description": "Only * admin * user can access",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
           {
             "in": "path",
             "name": "id",
-            "description": "ID Category",
+            "description": "Category Id",
             "required": true,
             "type": "string"
           }
@@ -500,13 +403,9 @@
         "tags": ["Produtos"],
         "summary": "Create a new product",
         "description": "Only * admin * user can access",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -575,13 +474,25 @@
       },
       "get": {
         "tags": ["Produtos"],
-        "summary": "List all products",
+        "summary": "Lista all products and list with query params",
         "description": "Only * admin * user can access",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
+            "in": "query",
+            "name": "id",
+            "description": "Category Id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Product Name",
             "required": false,
             "type": "string"
           }
@@ -664,79 +575,21 @@
         }
       }
     },
-    "/produtos/{product_id}": {
-      "get": {
-        "tags": ["Produtos"],
-        "summary": "List a specific product",
-        "description": "Only * admin * user can access",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "id",
-            "description": "ID product",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Operation performed successfully.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "id": "05487ed7-bbd6-42a2-9d44-d1d1dbad274f",
-                    "categoryId": "620bbe03-9497-49ef-9cbe-9e0244fe37b0",
-                    "name": "Maquina A",
-                    "manufacturingDate": "2021-01-01",
-                    "perishableProduct": true,
-                    "expirationDate": "2022-01-01",
-                    "price": "500.00",
-                    "created_at": "2021-03-28T15:18:14.240Z"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "User not found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "example": {
-                    "message": "User not found."
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
+    "/produtos/{id}": {
       "delete": {
         "tags": ["Produtos"],
         "summary": "Denounces a product.",
         "description": "Only * admin * user can access",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "in": "path",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "path",
             "name": "id",
-            "description": "ID Product",
+            "description": "Product Id",
             "required": true,
             "type": "string"
           }
@@ -785,18 +638,16 @@
         "tags": ["Produtos"],
         "summary": "Change the data for a product.",
         "description": "Only * admin * user can access",
-        "parameters": [
+        "security": [
           {
-            "in": "header",
-            "name": "user_id",
-            "description": "ID User",
-            "required": false,
-            "type": "string"
-          },
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
           {
             "in": "path",
             "name": "id",
-            "description": "ID Product",
+            "description": "Product Id",
             "required": true,
             "type": "string"
           }
@@ -879,6 +730,15 @@
             }
           }
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
