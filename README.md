@@ -44,7 +44,7 @@
 <p align="center">
   Abaixo estão algumas das tecnologias utilizadas durante o desenvolvimento do backend. Ainda foi visado: Organizar o diretório da nossa aplicação de forma concisa, limpa e eficiente. Escrever código limpo visando reutilização e eficiência e criar testes unitários de integração.
 </p>
-<br>
+<br/>
 <p align="center">
   <img  src="https://img.shields.io/badge/-Yarn-2C8EBB?&style=for-the-badge&logoColor=fff&logo=yarn&logoWidth=25"/>
   <img  src="https://img.shields.io/badge/-TypeScript-3178C6?&style=for-the-badge&logoColor=fff&logo=TypeScript&logoWidth=25"/>
@@ -52,7 +52,7 @@
   <img  src="https://img.shields.io/badge/-Typeorm-F37626?&style=for-the-badge&logoColor=fff&logo=Databricks&logoWidth=25"/>
   <img  src="https://img.shields.io/badge/-Docker-2496ED?&style=for-the-badge&logoColor=fff&logo=Docker&logoWidth=25"/>
 </p>
-
+<br/><br/>
 <p align="left>
 
 ### :keyboard: Instalação e Execução do Projeto
@@ -105,7 +105,7 @@ yarn test
 yarn dev
 ```
 </p>
-<br><br>
+<br/><br/>
 <p align="center">
   <img src="./assets/test.png">
 </p>
